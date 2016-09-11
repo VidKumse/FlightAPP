@@ -27,10 +27,15 @@ public class Main {
     }
 
     @Data
-    static class NewPostPayload {
-        private String title;
-        private List categories = new LinkedList<>();
-        private String content;
+    static class Template{
+        public String title;
+        public List categories = new LinkedList<>();
+        public String content;
+    }
+
+
+
+    static class NewPostPayload extends Template {
 
         public boolean isValid() {
             return title != null && !title.isEmpty() && !categories.isEmpty();
@@ -43,11 +48,9 @@ public class Main {
         private Map posts = new HashMap<>();
 
         @Data
-        class Post {
+        class Post extends Template {
             private int id;
-            private String title;
-            private List categories;
-            private String content;
+
         }
 
         public int createPost(String title, String content, List categories){
