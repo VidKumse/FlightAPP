@@ -1,13 +1,12 @@
+package me.mojaaplikacija;
 
-
-//import sun.reflect.FieldInfo;
+//import sun.reflect.me.mojaaplikacija.FieldInfo;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * This class provides the basic database services. It uses two
- * other support classes: DataInfo and FieldInfo.
+ * other support classes: me.mojaaplikacija.DataInfo and me.mojaaplikacija.FieldInfo.
  *
  * @version 1.1  17-Nov-1997
  */
@@ -17,7 +16,7 @@ public class Data {
     private static final int MAGIC = 0xC0C0BABE;
 
     private static final String UNEXPECTED =
-            "Data: Unexpected database access problem";
+            "me.mojaaplikacija.Data: Unexpected database access problem";
 
     private FieldInfo[] description;
     private int headerLen;
@@ -47,23 +46,23 @@ public class Data {
             }
 
             if (db.readInt() != MAGIC) {
-                throw new IOException("Data: corrupted database file.  " +
+                throw new IOException("me.mojaaplikacija.Data: corrupted database file.  " +
                         "Magic not found in file " + dbname);
             }
 
             if (db.getFilePointer() != headerLen) {
-                throw new IOException("Data: corrupted database file.  " +
+                throw new IOException("me.mojaaplikacija.Data: corrupted database file.  " +
                         "Header length incorrect in file " + dbname);
             }
         } else {
-            throw new IOException("Data: request to open non-existant or " +
+            throw new IOException("me.mojaaplikacija.Data: request to open non-existant or " +
                     "inaccessible file" + dbname);
         }
     }
 
     /**
      * This constructor creates a new database file, using the name
-     * provided for the disk file and using the FieldInfo array to
+     * provided for the disk file and using the me.mojaaplikacija.FieldInfo array to
      * describe the field names and sizes that should be created.
      *
      * @param String dbname The name of the database file to open.
@@ -91,16 +90,16 @@ public class Data {
             db.seek(0);
             db.writeInt(headerLen);
         } else {
-            throw new IOException("Data: request to create pre-existing " +
+            throw new IOException("me.mojaaplikacija.Data: request to create pre-existing " +
                     "file" + dbname);
         }
     }
 
     /**
      * This method returns a description of the database schema, as an
-     * array of FieldInfo objects.
+     * array of me.mojaaplikacija.FieldInfo objects.
      *
-     * @return FieldInfo[] The array of FieldInfo objects that comprise
+     * @return me.mojaaplikacija.FieldInfo[] The array of me.mojaaplikacija.FieldInfo objects that comprise
      *          the schema to this database.
      */
     public FieldInfo [] getFieldInfo() {
@@ -115,7 +114,7 @@ public class Data {
     /**
      * Gets a requested record from the database based on record number.
      * @param recNum The number of the record to read (first record is 1).
-     * @return DataInfo for the record or null if the record has been marked for
+     * @return me.mojaaplikacija.DataInfo for the record or null if the record has been marked for
      *    deletion.
      * @exception DatabaseException Thrown if database file cannot be accessed.
      */
@@ -146,7 +145,7 @@ public class Data {
      *
      * @param toMatch The key field value to match upon for
      *           a successful find.
-     * @return DataInfo The matching record.
+     * @return me.mojaaplikacija.DataInfo The matching record.
      * @exception DatabaseException Thrown when database file could not be accessed.
      */
     public synchronized DataInfo find(String toMatch) throws DatabaseException {
@@ -207,7 +206,7 @@ public class Data {
 
     /**
      * This method updates the record specified by the record number
-     * field in the DataInfo argument. The fields are all modified
+     * field in the me.mojaaplikacija.DataInfo argument. The fields are all modified
      * to reflect the values in that argument. If the key field
      * specified in the argument matches any record other than the
      * one indicated by the record number of the argument, then a
@@ -237,7 +236,7 @@ public class Data {
 
     /**
      * This method deletes the record referred to by the record
-     * number in the DataInfo argument.
+     * number in the me.mojaaplikacija.DataInfo argument.
      *
      * @param DataInfo newData The record to delete.
      * @exception DatabaseException Thrown if database cannot be accessed.
@@ -303,7 +302,7 @@ public class Data {
      */
     private void writeRecord(String[] newData) throws IOException {
         if (newData.length != description.length) {
-            throw new IOException("Data: Wrong number of fields in writeRecord() " +
+            throw new IOException("me.mojaaplikacija.Data: Wrong number of fields in writeRecord() " +
                     newData.length + " given, " +
                     description.length + " required");
         }
@@ -366,7 +365,7 @@ public class Data {
         }
 
         if (!ok) {
-            throw new RuntimeException("Data: Internal error");
+            throw new RuntimeException("me.mojaaplikacija.Data: Internal error");
         }
     }
 }

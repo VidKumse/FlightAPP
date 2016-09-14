@@ -1,4 +1,4 @@
-
+package me.mojaaplikacija;
 
 import java.io.*;
 
@@ -14,7 +14,7 @@ public class FieldInfo implements Serializable {
     final static char sc = 'A';
 
     /**
-     * This constructs an initialized FieldInfo object.
+     * This constructs an initialized me.mojaaplikacija.FieldInfo object.
      *
      * @param String name - the name of the field.
      * @param int length - the length of the field.

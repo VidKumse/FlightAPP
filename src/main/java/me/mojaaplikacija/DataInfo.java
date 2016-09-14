@@ -1,6 +1,6 @@
+package me.mojaaplikacija;
 
-
-//import sun.reflect.FieldInfo;
+//import sun.reflect.me.mojaaplikacija.FieldInfo;
 
 import java.io.*;
 
@@ -12,20 +12,21 @@ import java.io.*;
  * @version 1.0  11-Sep-1997
  */
 public class DataInfo implements Serializable {
-    private int recordNumber;
-    private String [] values;
-    private FieldInfo[] fields;
+
+    private int recordNumber; // vrstica
+    private String [] values; // vsebina field Infota
+    private FieldInfo[] fields; // ime in dolzino
     final static char sc = 'A';
 
     /**
-     * This constructor creates a DataInfo object which has null
+     * This constructor creates a me.mojaaplikacija.DataInfo object which has null
      * Strings for its field values.
      *
      * @param recordNumber - the unique number for this record.
-     * @param fields - the array of FieldInfo objects
+     * @param fields - the array of me.mojaaplikacija.FieldInfo objects
      *                             which represent the names and
      *                             lenghts of the fields in this
-     *                             DataInfo object.
+     *                             me.mojaaplikacija.DataInfo object.
      */
     public DataInfo(int recordNumber, FieldInfo [] fields) {
         this.recordNumber = recordNumber;
@@ -35,14 +36,14 @@ public class DataInfo implements Serializable {
     }
 
     /**
-     * This constructor creates a DataInfo object that contains
+     * This constructor creates a me.mojaaplikacija.DataInfo object that contains
      * Strings for its field values.
      *
      * @param recordNumber - the unique number for this record.
-     * @param fields - the array of FieldInfo objects
+     * @param fields - the array of me.mojaaplikacija.FieldInfo objects
      *                             which represent the names and
      *                             lenghts of the fields in this
-     *                             DataInfo object.
+     *                             me.mojaaplikacija.DataInfo object.
      * @param values - The values for the field values.
      */
     public DataInfo(int recordNumber, FieldInfo [] fields, String [] values) {
@@ -52,9 +53,9 @@ public class DataInfo implements Serializable {
 
     /**
      * This method returns the record number associated with this
-     * DataInfo.
+     * me.mojaaplikacija.DataInfo.
      *
-     * @returns int - the unique record number of this DataInfo
+     * @returns int - the unique record number of this me.mojaaplikacija.DataInfo
      */
     public int getRecordNumber() {
         return recordNumber;
@@ -65,19 +66,19 @@ public class DataInfo implements Serializable {
      * values of the fields in this DataItem.
      *
      * @returns String[] - String array of all the field values
-     *                     of this DataInfo.
+     *                     of this me.mojaaplikacija.DataInfo.
      */
     public String [] getValues() {
         return values;
     }
 
     /**
-     * This method returns an array of FieldInfo objects. These
+     * This method returns an array of me.mojaaplikacija.FieldInfo objects. These
      * describe the database schema in terms of the name and
      * width of each field.
      *
-     * @returns FieldInfo[] - FieldInfo array of all the fields
-     *                        of this DataInfo.
+     * @returns me.mojaaplikacija.FieldInfo[] - me.mojaaplikacija.FieldInfo array of all the fields
+     *                        of this me.mojaaplikacija.DataInfo.
      */
     public FieldInfo [] getFields() {
         return fields;
@@ -85,9 +86,9 @@ public class DataInfo implements Serializable {
 
     /**
      * This method constructs and returns a String which describes
-     * this DataInfo object in a form suitable for debug output.
+     * this me.mojaaplikacija.DataInfo object in a form suitable for debug output.
      *
-     * @returns String - A textual representation of this DataInfo.
+     * @returns String - A textual representation of this me.mojaaplikacija.DataInfo.
      */
     public String toString() {
         StringBuffer rv = new StringBuffer(super.toString() +
