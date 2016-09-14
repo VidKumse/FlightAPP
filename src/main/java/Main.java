@@ -44,33 +44,6 @@ public class Main {
         }
     }
 
-    // In a real application you may want to use a DB, for this example we just store the posts in memory
-    public static class Model {
-        private int nextId = 1;
-        private Map posts = new HashMap<>();
-
-        @Data
-        class Post extends Template {
-            private int id;
-
-        }
-
-        public int createPost(String title, String content, List categories){
-            int id = nextId++;
-            Post post = new Post();
-            post.setId(id);
-            post.setTitle(title);
-            post.setContent(content);
-            post.setCategories(categories);
-            posts.put(id, post);
-            return id;
-        }
-
-        public List getAllPosts(){
-            return (List) posts.keySet().stream().sorted().map((id) -> posts.get(id)).collect(Collectors.toList());
-        }
-    }
-
     public static String dataToJson(Object data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -83,8 +56,14 @@ public class Main {
         }
     }
 
+    private FieldInfo f1 = new FieldInfo("flight number", 13);
+    private FieldInfo f2 = new FieldInfo("Origin airport", 14);
+    private FieldInfo f3 = new FieldInfo("Destination airport", 19);
+    private FieldInfo[] fieldinfo = {f1, f2, f3};
+    Data db = new Data();
+
     public static void main( String[] args) {
-        Model model = new Model();
+
 
         // insert a post (using HTTP post method)
         post("/posts", (request, response) -> {
@@ -95,7 +74,7 @@ public class Main {
                     response.status(HTTP_BAD_REQUEST);
                     return "";
                 }
-                int id = model.createPost(creation.getTitle(), creation.getContent(), creation.getCategories());
+                int id = 4;
                 response.status(200);
                 response.type("application/json");
                 return id;
