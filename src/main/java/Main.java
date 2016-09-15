@@ -1,12 +1,14 @@
-
+//package me.mojaaplikacija;
 
 import static spark.Spark.get;
-import static spark.Spark.post;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
+import me.mojaaplikacija.DBHandler;
 import me.mojaaplikacija.FieldInfo;
+import me.mojaaplikacija.Post;
+
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -21,21 +23,7 @@ public class Main {
         boolean isValid();
     }
 
-    @Data
-    static class Template{
-        public String title;
-        public List categories = new LinkedList<>();
-        public String content;
-    }
 
-
-
-    static class NewPostPayload extends Template {
-
-        public boolean isValid() {
-            return title != null && !title.isEmpty() && !categories.isEmpty();
-        }
-    }
 
     public static String dataToJson(Object data) {
         try {
@@ -49,20 +37,14 @@ public class Main {
         }
     }
 
-    private FieldInfo f1 = new FieldInfo("flight number", 13);
-    private FieldInfo f2 = new FieldInfo("Origin airport", 14);
-    private FieldInfo f3 = new FieldInfo("Destination airport", 19);
-    private FieldInfo[] fieldinfo = {f1, f2, f3};
-
     public static void main( String[] args) {
-        FieldInfo [] fi = new FieldInfo[1];
-        fi[0] = new FieldInfo("test", 10);
+        String dbname = "C:\\Users\\vid\\test.txt";
 
-        try {
-            me.mojaaplikacija.Data db = new me.mojaaplikacija.Data("C:\\Users\\vid\\test.txt", fi);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DBHandler DB = new DBHandler(dbname);
+        Post post = new Post("n3", "n4");
+        DB.SaveToDB(post);
+        String read = DB.ReadFromDB(4);
+        System.out.println(read);
     }
 }
 
