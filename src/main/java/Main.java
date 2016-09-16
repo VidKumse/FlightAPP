@@ -39,8 +39,12 @@ public class Main {
 
     public static void main( String[] args) {
         String dbname = "C:\\Users\\vid\\test.txt";
+        FieldInfo [] fi;
+        fi = new FieldInfo[2];
+        fi[0] = new FieldInfo("title", 5);
+        fi[1] = new FieldInfo("content", 6);
 
-        DBHandler DB = new DBHandler(dbname);
+        DBHandler DB = new DBHandler(dbname, fi);
         Post post = new Post("n3", "n4");
         DB.SaveToDB(post);
         String read = DB.ReadFromDB(4);

@@ -9,15 +9,6 @@ public class Post {
         content = c;
     }
 
-    public static FieldInfo[] Init() {
-        FieldInfo [] fi;
-        fi = new FieldInfo[2];
-        fi[0] = new FieldInfo("title", 5);
-        fi[1] = new FieldInfo("content", 6);
-        return fi;
-
-    }
-
     public boolean isValid() {
         return title != null && !title.isEmpty();
     }

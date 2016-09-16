@@ -13,8 +13,9 @@ public class DBHandler {
     private boolean db_exists;
     private String [] data;
     private  DataInfo readData;
+    private FieldInfo [] fieldInfoArray;
 
-    public DBHandler(String name) {
+    public DBHandler(String name, FieldInfo [] fi) {
 
         try {
             db = new me.mojaaplikacija.Data(name);
@@ -25,8 +26,8 @@ public class DBHandler {
 
         if (db_exists == FALSE) {
             try {
-                FieldInfo [] fi = Post.Init();
                 db = new Data(name, fi);
+                this.fieldInfoArray = fi;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -35,8 +36,7 @@ public class DBHandler {
 
     public void SaveToDB(Post post) {
         try {
-            String [] title = post.toStringArray();
-            data = title;
+            String [] data = post.toStringArray();
             db.add(data);
         } catch (DatabaseException e) {
             e.printStackTrace();
