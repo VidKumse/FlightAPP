@@ -43,14 +43,12 @@ public class Main {
         fi[1] = new FieldInfo("content", 10);
 
         //zakvaj
-        Post post = new Post("Nas", "moja ob");
+        //Post post = new Post("Cetrti", "Cetrti");
         PostDAO postDAO = new PostDAOImpl(dbname, fi);
-        postDAO.createPost(post);
+        //postDAO.createPost(post);
         for (Post post_count : postDAO.getAllPosts()) {
             System.out.println("Title: "+post_count.getTitle()+" Content: "+post_count.getContent());
         }
-
-
     }
 }
 

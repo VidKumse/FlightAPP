@@ -56,8 +56,10 @@ public class PostDAOImpl implements PostDAO {
         Post post = null;
         try {
             readData = db.getRecord(id);
+            if(readData == null) {
+                return null;
+            }
             valuesArray = readData.getValues();
-
             //tale del potrebuje še neko posplošitev
             post = new Post(valuesArray[0], valuesArray[1]);
 
@@ -82,12 +84,12 @@ public class PostDAOImpl implements PostDAO {
     public List<Post> getAllPosts() {
         List<Post> list_of_posts = new ArrayList<>();
         Post post;
-        int recordCount=db.getRecordCount();
-        System.out.println(Integer.toString(recordCount));
+        int recordCount=db.getRecordCount();;
         for(int i=1; i<=recordCount; i++) {
                 post=getPost(i);
-                list_of_posts.add(post);
-                System.out.println(Integer.toString(i));
+                if(post != null) {
+                    list_of_posts.add(post);
+                }
         }
         return list_of_posts;
     }
