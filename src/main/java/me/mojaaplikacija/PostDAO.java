@@ -8,4 +8,5 @@ public interface PostDAO {
     public Post getPost(int id);
     public void createPost(Post post);
     public void deletePost(int id);
+    public void update(Post post);
 }

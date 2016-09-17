@@ -42,10 +42,11 @@ public class Main {
         fi[0] = new FieldInfo("title", 10);
         fi[1] = new FieldInfo("content", 10);
 
+        Post post = new Post(1, "Cetrti", "Cetrti");
+
         //zakvaj
-        //Post post = new Post("Cetrti", "Cetrti");
         PostDAO postDAO = new PostDAOImpl(dbname, fi);
-        //postDAO.createPost(post);
+        postDAO.update(post);
         for (Post post_count : postDAO.getAllPosts()) {
             System.out.println("Title: "+post_count.getTitle()+" Content: "+post_count.getContent());
         }

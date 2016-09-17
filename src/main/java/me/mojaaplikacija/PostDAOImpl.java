@@ -15,8 +15,8 @@ public class PostDAOImpl implements PostDAO {
     me.mojaaplikacija.Data db;
     private boolean db_exists;
     private String [] data;
-    private  DataInfo readData;
-    private FieldInfo [] fieldInfoArray;
+    private DataInfo readData;
+    private FieldInfo [] fieldInfoArray = null;
     private String [] valuesArray;
 
     public PostDAOImpl(String name, FieldInfo [] fi){
@@ -31,10 +31,11 @@ public class PostDAOImpl implements PostDAO {
         if (db_exists == FALSE) {
             try {
                 db = new Data(name, fi);
-                this.fieldInfoArray = fi;
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            this.fieldInfoArray = fi;
         }
     }
 
@@ -92,6 +93,21 @@ public class PostDAOImpl implements PostDAO {
                 }
         }
         return list_of_posts;
+    }
+
+    @Override
+    public void update(Post post) {
+        int id = post.getId();
+        String title = post.getTitle();
+        String content = post.getContent();
+        String [] fieldValues = {title, content};
+
+        DataInfo datainfo = new DataInfo(id, fieldInfoArray, fieldValues);
+        try {
+            db.modify(datainfo);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
     }
 
 }
