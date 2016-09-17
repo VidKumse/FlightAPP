@@ -46,7 +46,11 @@ public class Main {
         Post post = new Post("Nas", "moja ob");
         PostDAO postDAO = new PostDAOImpl(dbname, fi);
         postDAO.createPost(post);
-        System.out.println("blabla "+postDAO.getPost(1).toString());
+        for (Post post_count : postDAO.getAllPosts()) {
+            System.out.println("Title: "+post_count.getTitle()+" Content: "+post_count.getContent());
+        }
+
+
     }
 }
 

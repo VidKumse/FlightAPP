@@ -1,8 +1,10 @@
 package me.mojaaplikacija;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import static java.lang.Boolean.FALSE;
 
 /**
@@ -74,6 +76,20 @@ public class PostDAOImpl implements PostDAO {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        List<Post> list_of_posts = new ArrayList<>();
+        Post post;
+        int recordCount=db.getRecordCount();
+        System.out.println(Integer.toString(recordCount));
+        for(int i=1; i<=recordCount; i++) {
+                post=getPost(i);
+                list_of_posts.add(post);
+                System.out.println(Integer.toString(i));
+        }
+        return list_of_posts;
     }
 
 }
