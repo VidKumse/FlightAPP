@@ -5,9 +5,7 @@ import static spark.Spark.get;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
-import me.mojaaplikacija.DBHandler;
-import me.mojaaplikacija.FieldInfo;
-import me.mojaaplikacija.Post;
+import me.mojaaplikacija.*;
 
 
 import java.io.IOException;
@@ -39,16 +37,16 @@ public class Main {
 
     public static void main( String[] args) {
         String dbname = "C:\\Users\\vid\\test.txt";
-        FieldInfo [] fi;
+        me.mojaaplikacija.FieldInfo [] fi;
         fi = new FieldInfo[2];
-        fi[0] = new FieldInfo("title", 5);
-        fi[1] = new FieldInfo("content", 6);
+        fi[0] = new FieldInfo("title", 10);
+        fi[1] = new FieldInfo("content", 10);
 
-        DBHandler DB = new DBHandler(dbname, fi);
-        Post post = new Post("n3", "n4");
-        DB.SaveToDB(post);
-        String read = DB.ReadFromDB(4);
-        System.out.println(read);
+        //zakvaj
+        Post post = new Post("Nas", "moja ob");
+        PostDAO postDAO = new PostDAOImpl(dbname, fi);
+        postDAO.createPost(post);
+        System.out.println("blabla "+postDAO.getPost(1).toString());
     }
 }
 

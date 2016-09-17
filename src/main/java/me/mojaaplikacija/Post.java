@@ -36,4 +36,9 @@ public class Post {
         data[1] = new String(content);
         return data;
     }
+
+    public String toString() {
+        String write = "Title: "+title+"; Content: "+content;
+        return write;
+    }
 }
