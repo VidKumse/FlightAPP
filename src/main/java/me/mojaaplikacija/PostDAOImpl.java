@@ -31,7 +31,6 @@ public class PostDAOImpl implements PostDAO {
         if (db_exists == FALSE) {
             try {
                 db = new Data(name, fi);
-                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,7 +61,7 @@ public class PostDAOImpl implements PostDAO {
             }
             valuesArray = readData.getValues();
             //tale del potrebuje še neko posplošitev
-            post = new Post(valuesArray[0], valuesArray[1]);
+            post = new Post(id, valuesArray[0], valuesArray[1]);
 
 
         } catch (DatabaseException e) {
