@@ -6,6 +6,7 @@ import java.util.List;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import static java.lang.Boolean.FALSE;
+import static spark.route.HttpMethod.post;
 
 /**
  * Created by Vid on 16.9.2016.
@@ -108,7 +109,8 @@ public class PostDAOImpl implements PostDAO {
         return list_of_posts;
     }
 
-    @Override
+    // TOLE JE ORIGINAL FUNKCIJA, KI JI PODAMO OBJEKT
+    /*@Override
     public void update(Post post) {
         int id = post.getId();
         String title = post.getTitle();
@@ -121,6 +123,21 @@ public class PostDAOImpl implements PostDAO {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }*/
+
+    //TOLE JE DRUGA FUNKCIJA, KI JI PODAMO STRINGE
+    @Override
+    public Post update(int id, String title, String content) {
+        String [] fieldValues = {title, content};
+
+        DataInfo datainfo = new DataInfo(id, fieldInfoArray, fieldValues);
+        try {
+            db.modify(datainfo);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        Post post = new Post(id, title, content);
+        return post;
     }
 
 }

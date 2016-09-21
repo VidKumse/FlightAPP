@@ -28,6 +28,9 @@ public class PostController {
 
         spark.Spark.post("/api/posts", (req, res) -> postDAO.createPost(req.queryParams("title"), req.queryParams("content")), json());
 
+        // http://localhost:4567/api/posts/3?title=cetrti&content=cetrti
+        spark.Spark.put("api/posts/:id", (req, res) -> postDAO.update(Integer.parseInt(req.params(":id")), req.queryParams("title"), req.queryParams("content")), json());
+
         exception(IllegalArgumentException.class, (e, req, res) -> {
             res.status(400);
             res.body(toJson(new ResponseError(e)));
