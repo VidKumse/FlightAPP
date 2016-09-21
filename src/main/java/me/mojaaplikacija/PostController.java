@@ -2,7 +2,9 @@ package me.mojaaplikacija;
 import spark.Spark.*;
 
 import static me.mojaaplikacija.JsonUtil.json;
+import static me.mojaaplikacija.JsonUtil.toJson;
 import static spark.Spark.after;
+import static spark.Spark.exception;
 
 /**
  * Created by Vid on 19.9.2016.
@@ -23,6 +25,13 @@ public class PostController {
                 res.status(400);
                 return new ResponseError("There is no user with id %s", id);
                 }, json());
+
+        spark.Spark.post("/api/posts", (req, res) -> postDAO.createPost(req.queryParams("title"), req.queryParams("content")), json());
+
+        exception(IllegalArgumentException.class, (e, req, res) -> {
+            res.status(400);
+            res.body(toJson(new ResponseError(e)));
+        });
 
         //filter, ki doda v json tip
         after((req, res) -> {

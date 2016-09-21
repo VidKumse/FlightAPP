@@ -70,7 +70,8 @@ public class PostDAOImpl implements PostDAO {
         return post;
     }
 
-    @Override
+    // TOLE JE ORIGINAL FUNKCIJA, KI JI PODAMO OBJEKT
+    /*@Override
     public void createPost(Post post) {
         try {
             String [] data = post.toStringArray();
@@ -78,6 +79,19 @@ public class PostDAOImpl implements PostDAO {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }*/
+
+    //TOLE JE DRUGA FUNKCIJA, KI JI PODAMO STRINGE
+    @Override
+    public Post createPost(String title, String content) {
+        try {
+            String [] data = {title, content};
+            db.add(data);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        Post post = new Post(title, content);
+        return post;
     }
 
     @Override

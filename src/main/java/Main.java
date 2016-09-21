@@ -56,7 +56,7 @@ public class Main {
         //Tako je v tutorialu!!
         //new PostController(new PostDAOImpl(dbname, fi));
 
-        //postDAO.update(post);
+        //postDAO.createPost("sesti","sesta objava");
         /*for (Post post_count : postDAO.getAllPosts()) {
             System.out.println("Title: "+post_count.getTitle()+" Content: "+post_count.getContent());
         }*/
