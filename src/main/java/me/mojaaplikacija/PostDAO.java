@@ -9,4 +9,5 @@ public interface PostDAO {
     public boolean createPost(String... args);
     public void deletePost(int id);
     public boolean update(int id, String... args);
+    public String [] getParams();
 }

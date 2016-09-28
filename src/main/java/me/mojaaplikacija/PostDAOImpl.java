@@ -16,13 +16,20 @@ public class PostDAOImpl implements PostDAO {
 
     me.mojaaplikacija.Data db;
     private boolean db_exists;
-    private String [] data;
+    private String[] data;
     private DataInfo readData;
-    private FieldInfo [] fieldInfoArray = null;
-    private String [] valuesArray;
-    private String [] keysArray;
+    private FieldInfo[] fieldInfoArray;
+    private String[] valuesArray;
+    private String[] keysArray;
 
-    public PostDAOImpl(String name, FieldInfo [] fi){
+    public PostDAOImpl(String name, FieldInfo[] fi) {
+        fieldInfoArray = new FieldInfo[fi.length];
+        System.arraycopy(fi, 0, fieldInfoArray, 0, fi.length);
+        keysArray = new String[fieldInfoArray.length];
+
+        for (int i = 0; i < fieldInfoArray.length; i++) {
+            this.keysArray[i] = fieldInfoArray[i].getName();
+        }
 
         try {
             db = new me.mojaaplikacija.Data(name);
@@ -37,7 +44,6 @@ public class PostDAOImpl implements PostDAO {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            this.fieldInfoArray = fi;
         }
     }
 
@@ -59,13 +65,13 @@ public class PostDAOImpl implements PostDAO {
         Post post = null;
         try {
             readData = db.getRecord(id);
-            if(readData == null) {
+            if (readData == null) {
                 return null;
             }
             valuesArray = readData.getValues();
             HashMap<String, String> params = new HashMap<String, String>();
 
-            for ( int i = 0; i<fieldInfoArray.length; i++ ) {
+            for (int i = 0; i < fieldInfoArray.length; i++) {
                 params.put(fieldInfoArray[i].getName(), valuesArray[i]);
             }
             //tale del potrebuje še neko posplošitev
@@ -104,12 +110,13 @@ public class PostDAOImpl implements PostDAO {
     public List<Post> getAllPosts() {
         List<Post> list_of_posts = new ArrayList<>();
         Post post;
-        int recordCount=db.getRecordCount();;
-        for(int i=1; i<=recordCount; i++) {
-                post=getPost(i);
-                if(post != null) {
-                    list_of_posts.add(post);
-                }
+        int recordCount = db.getRecordCount();
+        ;
+        for (int i = 1; i <= recordCount; i++) {
+            post = getPost(i);
+            if (post != null) {
+                list_of_posts.add(post);
+            }
         }
         return list_of_posts;
     }
@@ -142,4 +149,8 @@ public class PostDAOImpl implements PostDAO {
         return true;
     }
 
+    @Override
+    public String[] getParams() {
+        return this.keysArray;
+    }
 }
