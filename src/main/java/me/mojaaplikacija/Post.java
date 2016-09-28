@@ -1,55 +1,63 @@
 package me.mojaaplikacija;
 
-public class Post {
-    private String title;
-    private String content;
-    private int id;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-    public Post(String t, String c) {
-        this.title = t;
-        this.content = c;
+public class Post {
+    private HashMap<String, String> params;
+    private int id;
+    private String value;
+
+    public Post(HashMap<String,  String> p) {
+        this.params = p;
     }
 
-    public Post(int id, String t, String c) {
+    public Post(int id, HashMap<String, String> p) {
         //podvajanje konstruktorjev!!!
-        this.title = t;
-        this.content = c;
+        this.params = p;
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public int getId() {
+        return this.id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String get(String param) {
+        for ( String key : params.keySet() ) {
+            System.out.println( key );
+            value = params.get(key);
+        }
+        return value;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void set(String param, String value) {
+        params.put(param, value);
     }
 
-    public int getId() { return id; }
-
-    public void setId(int id) { this.id = id; }
-
-    public boolean isValid() {
+    /*public boolean isValid() {
         return title != null && !title.isEmpty();
-    }
+    }*/
 
-    public String[] toStringArray() {
-        String [] data = new String[2];
-        data[0] = new String(title);
-        data[1] = new String(content);
+    public String [] toStringArray() {
+        String[] data = new String[params.size()];
+        int i=0;
+        for ( String key : params.keySet() ) {
+            i++;
+            data[i] = params.get(value);
+        }
+
         return data;
     }
 
     public String toString() {
-        String write = "Title: "+title+"; Content: "+content;
-        return write;
+        String text = "";
+        for ( String key : params.keySet() ) {
+            text = text + params.get(value) + " ";
+        }
+        return text;
     }
 }

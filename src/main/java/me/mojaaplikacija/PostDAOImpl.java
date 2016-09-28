@@ -2,6 +2,7 @@ package me.mojaaplikacija;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
@@ -19,6 +20,7 @@ public class PostDAOImpl implements PostDAO {
     private DataInfo readData;
     private FieldInfo [] fieldInfoArray = null;
     private String [] valuesArray;
+    private String [] keysArray;
 
     public PostDAOImpl(String name, FieldInfo [] fi){
 
@@ -61,8 +63,13 @@ public class PostDAOImpl implements PostDAO {
                 return null;
             }
             valuesArray = readData.getValues();
+            HashMap<String, String> params = new HashMap<String, String>();
+
+            for ( int i = 0; i<fieldInfoArray.length; i++ ) {
+                params.put(fieldInfoArray[i].getName(), valuesArray[i]);
+            }
             //tale del potrebuje še neko posplošitev
-            post = new Post(id, valuesArray[0], valuesArray[1]);
+            post = new Post(id, params);
 
 
         } catch (DatabaseException e) {
@@ -84,15 +91,13 @@ public class PostDAOImpl implements PostDAO {
 
     //TOLE JE DRUGA FUNKCIJA, KI JI PODAMO STRINGE
     @Override
-    public Post createPost(String title, String content) {
+    public boolean createPost(String... args) {
         try {
-            String [] data = {title, content};
-            db.add(data);
+            db.add(args);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
-        Post post = new Post(title, content);
-        return post;
+        return true;
     }
 
     @Override
@@ -127,17 +132,14 @@ public class PostDAOImpl implements PostDAO {
 
     //TOLE JE DRUGA FUNKCIJA, KI JI PODAMO STRINGE
     @Override
-    public Post update(int id, String title, String content) {
-        String [] fieldValues = {title, content};
-
-        DataInfo datainfo = new DataInfo(id, fieldInfoArray, fieldValues);
+    public boolean update(int id, String... args) {
+        DataInfo datainfo = new DataInfo(id, fieldInfoArray, args);
         try {
             db.modify(datainfo);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
-        Post post = new Post(id, title, content);
-        return post;
+        return true;
     }
 
 }

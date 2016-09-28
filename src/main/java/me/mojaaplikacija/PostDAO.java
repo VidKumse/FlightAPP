@@ -6,7 +6,7 @@ import java.util.List;
 public interface PostDAO {
     public List<Post> getAllPosts();
     public Post getPost(int id);
-    public Post createPost(String title, String content);
+    public boolean createPost(String... args);
     public void deletePost(int id);
-    public Post update(int id, String title, String content);
+    public boolean update(int id, String... args);
 }

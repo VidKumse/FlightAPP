@@ -10,6 +10,8 @@ import static spark.Spark.exception;
  * Created by Vid on 19.9.2016.
  */
 public class PostController {
+    
+
     public PostController(final PostDAO postDAO) {
 
         //dobimo vse poste
@@ -29,7 +31,7 @@ public class PostController {
         spark.Spark.post("/api/posts", (req, res) -> postDAO.createPost(req.queryParams("title"), req.queryParams("content")), json());
 
         // http://localhost:4567/api/posts/3?title=cetrti&content=cetrti
-        spark.Spark.put("api/posts/:id", (req, res) -> postDAO.update(Integer.parseInt(req.params(":id")), req.queryParams("title"), req.queryParams("content")), json());
+        //spark.Spark.put("api/posts/:id", (req, res) -> postDAO.update(Integer.parseInt(req.params(":id")), req.queryParams("title"), req.queryParams("content")), json());
 
         exception(IllegalArgumentException.class, (e, req, res) -> {
             res.status(400);
