@@ -7,7 +7,7 @@ public interface PostDAO {
     public List<Post> getAllPosts();
     public Post getPost(int id);
     public boolean createPost(String... args);
-    public void deletePost(int id);
+    public boolean deletePost(int id);
     public boolean update(int id, String... args);
     public String [] getParams();
 }

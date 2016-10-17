@@ -48,7 +48,7 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public void deletePost(int id) {
+    public boolean deletePost(int id) {
         DataInfo data_to_delete = null;
         try {
             data_to_delete = db.getRecord(id);
@@ -56,6 +56,7 @@ public class PostDAOImpl implements PostDAO {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     //retrive list of students from the database

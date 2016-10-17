@@ -37,10 +37,16 @@ public class Main {
 
     public static void main( String[] args) {
         String dbname = "C:\\Users\\vid\\test.txt";
-        me.mojaaplikacija.FieldInfo [] fi;
-        fi = new FieldInfo[2];
-        fi[0] = new FieldInfo("title", 10);
-        fi[1] = new FieldInfo("content", 10);
+        FieldInfo f1 = new FieldInfo("Flight number", 6);
+        FieldInfo f2 = new FieldInfo("Origin airport", 4);
+        FieldInfo f3 = new FieldInfo("Destination airport", 4);
+        FieldInfo f4 = new FieldInfo("Carrier", 15);
+        FieldInfo f5 = new FieldInfo("Price", 6);
+        FieldInfo f6 = new FieldInfo("Day", 3);
+        FieldInfo f7 = new FieldInfo("Time", 5);
+        FieldInfo f8 = new FieldInfo("Duration",  8);
+        FieldInfo f9 = new FieldInfo("Available seats", 4);
+        FieldInfo [] fi = new FieldInfo[]{f1, f2, f3, f4, f5, f6, f7 ,f8, f9};
 
 
 
@@ -56,7 +62,17 @@ public class Main {
         //Tako je v tutorialu!!
         //new PostController(new PostDAOImpl(dbname, fi));
 
-        //postDAO.createPost("sesti","sesta objava");
+        /*postDAO.createPost(
+                "SA001",  //flight number
+                "SFO",  //origin airport
+                "DEN",  //destination airport
+                "SpeedyAir",  //carrier
+                "400",   //price
+                "Sun",   //day
+                "13:40",   //time
+                "20m",   //duration
+                "50"   //available seats
+                );*/
         /*for (Post post_count : postDAO.getAllPosts()) {
             System.out.println("Title: "+post_count.getTitle()+" Content: "+post_count.getContent());
         }*/
