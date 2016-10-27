@@ -73,7 +73,7 @@ public class PostDAOImpl implements PostDAO {
             HashMap<String, String> params = new HashMap<String, String>();
 
             for (int i = 0; i < fieldInfoArray.length; i++) {
-                params.put(fieldInfoArray[i].getName(), valuesArray[i]);
+                params.put(fieldInfoArray[i].getName(), valuesArray[i].replace("\u0000", ""));
             }
             //tale del potrebuje še neko posplošitev
             post = new Post(id, params);
@@ -105,6 +105,35 @@ public class PostDAOImpl implements PostDAO {
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public List<Post> searchPost(HashMap<String, String> params) {
+        List<Post> list_of_posts = new ArrayList<>();
+        Post post;
+        int recordCount = db.getRecordCount();
+
+        for (int i=1; i<=recordCount; i++) {
+
+            post = getPost(i);
+            if (post != null) {
+                for (String property : keysArray) {
+
+                    for (HashMap.Entry<String, String> entry : params.entrySet()) {
+                        if (property.equals(entry.getKey())) {
+                            System.out.println("ss");
+                            String post_value = (post.get(property));
+                            String entry_value = (entry.getValue());
+                            if (post_value.equals(entry_value)) {
+                                list_of_posts.add(post);
+                                System.out.println(post.toString());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return list_of_posts;
     }
 
     @Override

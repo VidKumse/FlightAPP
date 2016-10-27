@@ -27,10 +27,7 @@ public class Post {
     }
 
     public String get(String param) {
-        for ( String key : params.keySet() ) {
-            System.out.println( key );
-            value = params.get(key);
-        }
+        String value = params.get(param);
         return value;
     }
 
@@ -55,9 +52,10 @@ public class Post {
 
     public String toString() {
         String text = "";
-        for ( String key : params.keySet() ) {
-            text = text + params.get(value) + " ";
+        for(HashMap.Entry<String, String> entry : params.entrySet()) {
+            text = text + entry.getValue()+" ";
         }
+
         return text;
     }
 }

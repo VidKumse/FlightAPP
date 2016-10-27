@@ -10,6 +10,7 @@ import me.mojaaplikacija.*;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,6 +60,9 @@ public class Main {
         PostController postController = new PostController(postDAO);
         System.out.println(postController);
 
+        /*HashMap<String, String> p = new HashMap<String, String>();
+        p.put("Day", "f");
+        postDAO.searchPost(p);*/
         //Tako je v tutorialu!!
         //new PostController(new PostDAOImpl(dbname, fi));
 

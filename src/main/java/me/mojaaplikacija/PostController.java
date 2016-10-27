@@ -5,6 +5,7 @@ import spark.Response;
 import spark.Spark.*;
 
 import java.io.Console;
+import java.util.HashMap;
 
 import static me.mojaaplikacija.JsonUtil.json;
 import static me.mojaaplikacija.JsonUtil.toJson;
@@ -32,8 +33,13 @@ public class PostController {
         this.postDAO = postDAO;
         String[] fieldInfoArray = postDAO.getParams();
 
+        HashMap<String, String> p = new HashMap<String, String>();
+        p.put("Day", "f");
+
         //dobimo vse poste
         spark.Spark.get("/api/posts", (req, res) -> postDAO.getAllPosts(), json());
+
+        spark.Spark.get("/api/posts/:search", (req, res) -> postDAO.searchPost(ConvertReqToHashMap(req)), json());
 
         //dobimo post po id-ju
         spark.Spark.get("/api/posts/:id", (req, res) -> {
@@ -66,6 +72,17 @@ public class PostController {
 
         enableCORS("*", "*", "*");
 
+    }
+
+    private static HashMap<String, String> ConvertReqToHashMap(Request req) {
+        //System.out.println(req.queryParams().size());
+        HashMap<String, String> p = new HashMap<String, String>();
+
+        for(String param : req.queryParams()) {
+            p.put(param, req.queryParams(param));
+            //System.out.println(param+" "+ req.queryParams(param));
+        }
+        return p;
     }
 
     private static void enableCORS(final String origin, final String methods, final String headers) {
